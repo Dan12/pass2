@@ -1,1 +1,9 @@
 <h1>Home Page</h1>
+<%User.all.each do |user|%>
+  <div class="user_display">
+      <p><%=user.name%></p>
+      <p><%=user.email%></p>
+      <p><%=user.user_type%></p>
+      <image src="<%=user.pic_url%>" width="70" height="70"></image>
+  </div>
+<%end%>

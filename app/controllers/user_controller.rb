@@ -9,11 +9,13 @@ class UserController < ApplicationController
     #if user not yet defined, set type to 1
     if user.user_type == nil
       user.user_type = 1
+      user.save
     end
     session[:user_id] = user.id
     redirect_to "/"
   end
 
+  #signout action
   def signout
     reset_session
     redirect_to "/"
