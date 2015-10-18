@@ -13,5 +13,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  has_many :courses, through: :enrollments 
+  has_many :enrollments
+  
+  has_many :courses, through: :enrollments
 end

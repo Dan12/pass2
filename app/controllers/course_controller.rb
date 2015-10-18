@@ -2,16 +2,35 @@ class CourseController < ApplicationController
   
   #create course
   def create
-    
+    @teacher = current_user
+    if @teacher.user_type == 2 or @teacher.user_type == 3
+      @course = Course.new
+      @course.name = params[:name]
+      @course.teacher_id = @teacher.id
+      @course.join_code = nil
+      if @course.save
+        redirect_to "/courses/view/#{@course.id}"
+      else
+        redirect_to "/users/view/#{teacher.id}"
+      end
+    else
+      redirect_to "/users/view/#{teacher.id}"
+    end
   end
   
   #view course page
   def view
-  
+    @course = Course.find_by(id: params[:id])
+    render "view"
   end
   
   #edit course
   def edit
+    
+  end
+  
+  #update course from edit page
+  def update
     
   end
   
