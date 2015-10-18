@@ -1,0 +1,32 @@
+<div id="user-view-section">
+  <div class="section-header">
+    <h1 id="user-view-header"><%=@user.name%></h2>
+  </div>
+  <div class="section-content">
+    <p><%=@user.email%></p>
+    <%if @user.user_type == 3%>
+      <p>Admin</p>
+    <%elsif @user.user_type == 2%>
+      <p>Teacher</p>
+    <%else%>
+      <p>Student</p>
+    <%end%>
+    <%if @visiting_user.id != @user.id and @visiting_user.user_type == 3 and @user.user_type != 3%>
+      <form action="/users/change_user_type">
+        <input type="hidden" name="user_id" value="<%=@user.id%>">
+        <%if @user.user_type == 1%>
+          <input type="hidden" name="change_type" value="2">
+          <input type="submit" value="Make Teacher">
+        <%else%>
+          <input type="hidden" name="change_type" value="1">
+          <input type="submit" value="Make Student">  
+        <%end%>
+      </form>
+      <form action="/users/change_user_type">
+        <input type="hidden" name="user_id" value="<%=@user.id%>">
+        <input type="hidden" name="change_type" value="3">
+        <input type="submit" value="Make Admin">
+      </form>
+    <%end%>
+  </div>
+</div>

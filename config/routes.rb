@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get "/auth/failure" => redirect("/")
   #signout
   get "/users/signout" => "user#signout"
+  #view
+  get "/users/view/:id" => "user#view"
 end

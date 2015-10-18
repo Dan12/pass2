@@ -20,4 +20,14 @@ class UserController < ApplicationController
     reset_session
     redirect_to "/"
   end
+  
+  def view
+    @user = User.find_by(id: params[:id])
+    if @user
+      @visiting_user = current_user
+      render "view"
+    else
+      redirect_to "/"
+    end
+  end
 end
