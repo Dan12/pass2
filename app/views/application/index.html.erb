@@ -1,9 +1,15 @@
-<h1>Home Page</h1>
-<%User.all.each do |user|%>
-  <div class="user_display">
-      <p><a href="/users/view/<%=user.id%>"><%=user.name%></a></p>
-      <p><%=user.email%></p>
-      <p><%=user.user_type%></p>
-      <image src="<%=user.pic_url%>" width="70" height="70"></image>
+<div id="home-section">
+  <div class="section-header">
+    <h1 id="home-header">E-Passes</h1>
   </div>
-<%end%>
+  <div class="section-content">
+    <%User.all.each do |user|%>
+      <div class="user_display">
+          <p><a href="/users/view/<%=user.id%>"><%=user.name%></a></p>
+          <p><%=user.email%></p>
+          <p><%=user.user_type%></p>
+          <image src="<%=user.pic_url%>" width="70" height="70"></image>
+      </div>
+    <%end%>
+  </div>
+</div>

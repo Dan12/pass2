@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   get "/users/signout" => "user#signout"
   #view
   get "/users/view/:id" => "user#view"
+  #change type
+  get "/users/change_user_type" => "user#change_user_type"
 end

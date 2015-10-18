@@ -30,4 +30,19 @@ class UserController < ApplicationController
       redirect_to "/"
     end
   end
+  
+  #change user type
+  def change_user_type
+    @user = User.find_by(id: params[:user_id])
+    @admin = current_user
+    if @user
+      if @admin.user_type == 3 and @user.user_type != 3
+        @user.user_type = params[:change_type].to_i
+        @user.save
+      end
+      redirect_to "/users/view/#{@user.id}"
+    else
+      redirect_to "/"
+    end
+  end
 end
