@@ -1,1 +1,20 @@
-<h1><%=@course.name%></h1>
+<div id="course-view-section">
+  <div class="section-header">
+    <h1 id="course-view-header"><%=@course.name%></h1>
+  </div>
+  <div class="section-content">
+    <h3>Teacher: <%=User.find_by(id: @course.teacher_id).name%></h3>
+    <p>Students:</p>
+    <%@course.users.each do |user|%>
+      <div class="user_display">
+          <p><a href="/users/view/<%=user.id%>"><%=user.name%></a></p>
+          <p><%=user.email%></p>
+          <p>Type: <%=user.user_type%></p>
+          <image src="<%=user.pic_url%>" width="70" height="70"></image>
+      </div>
+    <%end%>
+    <%if current_user.id == @course.teacher_id%>
+      <a href="/courses/edit/<%=@course.id%>">Edit Course</a>
+    <%end%>
+  </div>
+</div>

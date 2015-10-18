@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   get "/courses/create" => "course#create"
   #view
   get "/courses/view/:id" => "course#view"
+  #edit
+  get "/courses/edit/:id" => "course#edit"
   #update
-  get "/courses/update" => "course#update"
+  get "/courses/update/:id" => "course#update"
   #other
   get "/courses/add_student" => "course#add_student"
   get "/courses/remove_student" => "course#remove_student"

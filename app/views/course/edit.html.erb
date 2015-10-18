@@ -1,0 +1,12 @@
+<div id="course-edit-section">
+  <div class="section-header">
+    <h1 id="course-edit-header">Edit <%=@course.name%></h1>
+  </div>
+  <div class="section-content">
+    <form action="/courses/update/<%=@course.id%>">
+      <label>Course Name</label>
+      <input type="text" name="name" value="<%=@course.name%>">
+      <input type="submit" value="Update">
+    </form>
+  </div>
+</div>

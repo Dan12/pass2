@@ -26,12 +26,23 @@ class CourseController < ApplicationController
   
   #edit course
   def edit
-    
+    @course = Course.find_by(id: params[:id])
+    render "edit"
   end
   
   #update course from edit page
   def update
-    
+    @course = Course.find_by(id: params[:id])
+    @teacher = current_user
+    if @course and @course.teacher_id == @teacher.id
+      @course.name = params[:name]
+      if @course.name != nil and @course.name != ""
+        @course.save
+      end
+      redirect_to "/courses/view/#{@course.id}"
+    else
+      redirect_to "/users/view/#{@teacher.id}"
+    end
   end
   
   #teacher manually add student or through join code
