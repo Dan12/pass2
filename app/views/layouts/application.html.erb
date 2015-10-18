@@ -8,6 +8,15 @@
 </head>
 <body>
 
+<div id="user_status">
+  <% if current_user %>
+    Signed in as <strong><%= current_user.name %></strong> with <%= current_user.email%>
+    <a href="/users/signout" id="signout">Sign Out</a>
+  <% else %>
+    <a href="/auth/google_oauth2" id="signin">Sign in with Google</a>
+  <% end %>
+</div>
+
 <%= yield %>
 
 </body>
