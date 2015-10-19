@@ -27,4 +27,14 @@ Rails.application.routes.draw do
   get "/courses/unenroll" => "course#unenroll"
   get "/courses/enable_join_code" => "course#enable_join_code"
   get "/courses/disable_join_code" => "course#disable_join_code"
+  
+  #pass
+  #create
+  get "/passes/create" => "pass#create"
+  #view
+  get "/passes/view/:id" => "pass#view"
+  get "/passes/index" => "pass#index"
+  #verify
+  get "/passes/verify" => "pass#verify"
+  get "/passes/destroy" => "pass#destroy"
 end
