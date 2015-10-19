@@ -6,7 +6,8 @@ class PassController < ApplicationController
   
   end
   
-  #detailed view of pass, only accessed by student and all teachers
+  #detailed view of pass, only accessed by student with student_id
+  #and all teachers
   def view
   
   end
