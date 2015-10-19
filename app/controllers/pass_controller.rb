@@ -6,13 +6,20 @@ class PassController < ApplicationController
   
   end
   
-  #detailed view of pass
+  #detailed view of pass, only accessed by student and all teachers
   def view
   
   end
   
+  #quick overview of all passes organized by date and time
+  #for when they are to be used
+  #only viewable by teachers and admins
+  def index
+    
+  end
+  
   #teacher verifies pass with their teacher_id, makes pass valid
-  def verify
+  def verify_pass
     
   end
   
