@@ -2,6 +2,7 @@ class CourseController < ApplicationController
   
   helper_method :to_code
   
+  #generates join code from id because that is the only value that is unique
   def to_code(id)
     temp = id+10
     temp = temp*27211431
@@ -96,7 +97,6 @@ class CourseController < ApplicationController
     #student joined with join code
     else
       @course = Course.find_by(join_code: params[:join_code])
-      puts @course
       @student = current_user
       if @course
         if @student.enrollments.where(course_id: @course.id) == nil or @student.enrollments.where(course_id: @course.id) == []
@@ -138,6 +138,7 @@ class CourseController < ApplicationController
     end
   end
   
+  #student removes themself from a course
   def unenroll
     @student = current_user
     @course = Course.find_by(id: params[:course_id])

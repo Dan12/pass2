@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :login_required, :except => [:home, :create_from_callback]
   
+  #redirect to home page if not signed in
   def login_required
     if session[:user_id] == nil
       redirect_to "/"
