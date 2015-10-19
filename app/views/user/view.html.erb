@@ -11,6 +11,25 @@
     <%else%>
       <p>Student</p>
     <%end%>
+    <%if @visiting_user.id != @user.id and (@visiting_user.user_type == 2 or @visiting_user.user_type == 3)%>
+      <p>Create a Pass</p>
+      <form action="/passes/create" id="create_pass_form">
+        <div>
+          <label>Enter Pass Date and Time</label>
+          <input type="date" name="pass_date" id="pass_date">
+          <input type="time" name="pass_time" id="pass_time">
+        </div>
+        <div>
+          <label>Location To</label>
+          <input type="text" name="location_to">
+          <label id="pass_select_teacher_label">Search for recieving teacher:</label>
+          <input type="text" id="teacher_search_input">
+          <input type="hidden" name="teacher_to_id">
+        </div>
+        <input type="hidden" name="student_id" value="<%=@user.id%>">
+        <input type="hidden" name="time_offset" id="pass_time_offset">
+      </form>
+    <%end%>
     <%if @visiting_user.id == @user.id%>
       <form action="/courses/add_student">
         <label>Enter a course join code to join a course</label>

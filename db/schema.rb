@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019042738) do
+ActiveRecord::Schema.define(version: 20151019184750) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -30,15 +30,16 @@ ActiveRecord::Schema.define(version: 20151019042738) do
 
   create_table "passes", force: :cascade do |t|
     t.integer  "student_id"
-    t.integer  "teacher_id"
+    t.integer  "teacher_id_from"
     t.boolean  "verified"
     t.datetime "pass_datetime"
     t.string   "location_from"
     t.string   "location_to"
     t.string   "reason"
     t.boolean  "one_time"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "teacher_id_to"
   end
 
   create_table "users", force: :cascade do |t|

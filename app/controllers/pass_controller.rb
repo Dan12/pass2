@@ -13,6 +13,11 @@ class PassController < ApplicationController
     end
   end
   
+  def teacher_search
+    @teachers = User.where("name LIKE ? OR email LIKE ?", "%#{params[:partial_name]}%", "%#{params[:partial_name]}%")
+    render :json => {"teachers" => @teachers}
+  end
+  
   #detailed view of pass, only accessed by student with student_id
   #and all teachers
   def view

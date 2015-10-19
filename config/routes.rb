@@ -37,4 +37,6 @@ Rails.application.routes.draw do
   #verify
   get "/passes/verify" => "pass#verify"
   get "/passes/destroy" => "pass#destroy"
+  #other
+  post "/passes/teacher_search" => "pass#teacher_search"
 end
