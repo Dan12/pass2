@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id: 1
+  teacher_id: 1
+  verified: false
+  pass_datetime: 2015-10-19 04:27:38
+  location_from: MyString
+  location_to: MyString
+  reason: MyString
+  one_time: false
+
+two:
+  student_id: 1
+  teacher_id: 1
+  verified: false
+  pass_datetime: 2015-10-19 04:27:38
+  location_from: MyString
+  location_to: MyString
+  reason: MyString
+  one_time: false
