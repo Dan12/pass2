@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   #other
   get "/courses/add_student" => "course#add_student"
   get "/courses/remove_student" => "course#remove_student"
+  get "/courses/unenroll" => "course#unenroll"
   get "/courses/enable_join_code" => "course#enable_join_code"
   get "/courses/disable_join_code" => "course#disable_join_code"
 end

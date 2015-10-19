@@ -11,6 +11,13 @@
     <%else%>
       <p>Student</p>
     <%end%>
+    <%if @visiting_user.id == @user.id%>
+      <form action="/courses/add_student">
+        <label>Enter a course join code to join a course</label>
+        <input type="text" name="join_code">
+        <input type="submit" value="Enroll in course">
+      </form>
+    <%end%>
     <%if @visiting_user.id != @user.id and @visiting_user.user_type == 3 and @user.user_type != 3%>
       <form action="/users/change_user_type">
         <input type="hidden" name="user_id" value="<%=@user.id%>">
@@ -38,8 +45,9 @@
           </div>
           <input class="submit-button" type="submit" value="Create Course">
         </form>
+        <p>Courses created by <%=@user.name%>:</p>
         <%Course.where(teacher_id: @user.id).each do |course|%>
-          <p><a href="/courses/view/<%=course.id%>"><%=course.name%></a>-Owner</p>
+          <p><a href="/courses/view/<%=course.id%>"><%=course.name%></a></p>
         <%end%>
       <%else%>
         <%Course.where(teacher_id: @visiting_user.id).each do |course|%>
@@ -53,8 +61,15 @@
         <%end%>
       <%end%>
     <%end%>
+    <p>Courses Enrolled In:</p>
     <%@user.courses.each do |course|%>
       <p><a href="/courses/view/<%=course.id%>"><%=course.name%></a> by <%=User.find_by(id: course.teacher_id).name%></p>
+      <%if @visiting_user.id == @user.id%>
+        <form action="/courses/unenroll">
+          <input type="hidden" name="course_id" value="<%=course.id%>">
+          <input type="submit" value="Unenroll in <%=course.name%>">
+        </form>
+      <%end%>
     <%end%>
   </div>
 </div>

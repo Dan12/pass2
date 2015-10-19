@@ -3,8 +3,8 @@ class CourseController < ApplicationController
   helper_method :to_code
   
   def to_code(id)
-    temp = id+1459
-    temp = temp*27211
+    temp = id+10
+    temp = temp*27211431
     temp = temp.to_s(2)
     if temp.length%5 != 0
       addon = 5-temp.length%5
@@ -72,7 +72,7 @@ class CourseController < ApplicationController
   #create enrollment for user to add them
   def add_student
     #teacher added student
-    if params[:join_code] == nil or params[:join_code] = ""
+    if params[:join_code] == nil
       @teacher = current_user
       if @teacher.user_type == 2 or @teacher.user_type = 3
         @course = Course.find_by(id: params[:course_id])
@@ -95,7 +95,20 @@ class CourseController < ApplicationController
       end
     #student joined with join code
     else
-      
+      @course = Course.find_by(join_code: params[:join_code])
+      puts @course
+      @student = current_user
+      if @course
+        if @student.enrollments.where(course_id: @course.id) == nil or @student.enrollments.where(course_id: @course.id) == []
+          @enrollment = Enrollment.new
+          @enrollment.course_id = @course.id
+          @enrollment.user_id = @student.id
+          @enrollment.save
+        end
+        redirect_to "/courses/view/#{@course.id}"
+      else
+        redirect_to "/users/view/#{@student.id}"
+      end
     end
   end
   
@@ -123,6 +136,18 @@ class CourseController < ApplicationController
     else
       redirect_to "/users/view/#{@teacher.id}"
     end
+  end
+  
+  def unenroll
+    @student = current_user
+    @course = Course.find_by(id: params[:course_id])
+    if @course
+      @enrollment = Enrollment.find_by(course_id: @course.id, user_id: @student.id)
+      if @enrollment
+        @enrollment.destroy
+      end
+    end
+    redirect_to "/users/view/#{@student.id}"
   end
   
   #enable and generate join code

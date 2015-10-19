@@ -8,13 +8,6 @@
       <input type="text" name="name" value="<%=@course.name%>">
       <input type="submit" value="Update">
     </form>
-    <%@course.users.each do |user|%>
-      <form action="/courses/remove_student">
-        <input type="hidden" name="student_id" value="<%=user.id%>">
-        <input type="hidden" name="course_id" value="<%=@course.id%>">
-        <input type="submit" value="Remove <%=user.name%> from course">
-      </form>
-    <%end%>
     <%if @course.join_code == nil or @course.join_code == ""%>
       <form action="/courses/enable_join_code">
         <input type="hidden" name="course_id" value="<%=@course.id%>">
@@ -24,6 +17,13 @@
       <form action="/courses/disable_join_code">
         <input type="hidden" name="course_id" value="<%=@course.id%>">
         <input type="submit" value="Disable Join Code">
+      </form>
+    <%end%>
+    <%@course.users.each do |user|%>
+      <form action="/courses/remove_student">
+        <input type="hidden" name="student_id" value="<%=user.id%>">
+        <input type="hidden" name="course_id" value="<%=@course.id%>">
+        <input type="submit" value="Remove <%=user.name%> from course">
       </form>
     <%end%>
   </div>
