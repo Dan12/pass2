@@ -1,5 +1,28 @@
 class CourseController < ApplicationController
   
+  helper_method :to_code
+  
+  def to_code(id)
+    temp = id+1459
+    temp = temp*27211
+    temp = temp.to_s(2)
+    if temp.length%5 != 0
+      addon = 5-temp.length%5
+      (1..addon).each do
+        temp = "0"+temp
+      end
+    end
+    ret = ""
+    (0..temp.length-1).step(5) do |i|
+      tempasc = (temp[i..i+4].to_i(2)+65)
+      if tempasc > 90
+        tempasc = tempasc-41
+      end
+      ret = ret+tempasc.chr
+    end
+    return ret
+  end
+  
   #create course
   def create
     @teacher = current_user
@@ -104,11 +127,35 @@ class CourseController < ApplicationController
   
   #enable and generate join code
   def enable_join_code
-    
+    @teacher = current_user
+    if @teacher.user_type == 2 or @teacher.user_type == 3
+      @course = Course.find_by(id: params[:course_id])
+      if @course and @course.teacher_id == @teacher.id
+        @course.join_code = to_code(@course.id)
+        @course.save
+        redirect_to "/courses/view/#{@course.id}"
+      else
+        redirect_to "/users/view/#{@teacher.id}"
+      end
+    else
+      redirect_to "/users/view/#{@teacher.id}"
+    end
   end
   
   #disable join code by setting to nil
   def disable_join_code
-    
+    @teacher = current_user
+    if @teacher.user_type == 2 or @teacher.user_type == 3
+      @course = Course.find_by(id: params[:course_id])
+      if @course and @course.teacher_id == @teacher.id
+        @course.join_code = nil
+        @course.save
+        redirect_to "/courses/view/#{@course.id}"
+      else
+        redirect_to "/users/view/#{@teacher.id}"
+      end
+    else
+      redirect_to "/users/view/#{@teacher.id}"
+    end
   end
 end
