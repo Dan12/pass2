@@ -23,7 +23,7 @@
       <form action="/courses/remove_student">
         <input type="hidden" name="student_id" value="<%=user.id%>">
         <input type="hidden" name="course_id" value="<%=@course.id%>">
-        <input type="submit" value="Remove <%=user.name%> from course">
+        <input type="submit" value="Remove <%=user.name%> (<%=user.email%>) from course">
       </form>
     <%end%>
   </div>
