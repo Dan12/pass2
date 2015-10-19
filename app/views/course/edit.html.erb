@@ -8,5 +8,12 @@
       <input type="text" name="name" value="<%=@course.name%>">
       <input type="submit" value="Update">
     </form>
+    <%@course.users.each do |user|%>
+      <form action="/courses/remove_student">
+        <input type="hidden" name="student_id" value="<%=user.id%>">
+        <input type="hidden" name="course_id" value="<%=@course.id%>">
+        <input type="submit" value="Remove <%=user.name%> from course">
+      </form>
+    <%end%>
   </div>
 </div>
