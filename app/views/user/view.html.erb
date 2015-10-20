@@ -16,18 +16,31 @@
       <form action="/passes/create" id="create_pass_form">
         <div>
           <label>Enter Pass Date and Time</label>
-          <input type="date" name="pass_date" id="pass_date">
-          <input type="time" name="pass_time" id="pass_time">
+          <input type="datetime-local" name="pass_datetime" id="pass_datetime">
         </div>
         <div>
+          <label>Location From</label>
+          <input type="text" name="location_from">
           <label>Location To</label>
           <input type="text" name="location_to">
+        </div>
+        <div>
           <label id="pass_select_teacher_label">Search for recieving teacher:</label>
           <input type="text" id="teacher_search_input">
-          <input type="hidden" name="teacher_to_id">
+          <div id="teacher_search_results"></div>
+          <input type="hidden" name="teacher_to_id" id="pass_teacher_to_id">
+        </div>
+        <div>
+          <label>Reason: </label>
+          <input type="text" name="reason">
+        </div>
+        <div>
+          <label>One Time</label>
+          <input type="checkbox" name="one_time" value"on>
         </div>
         <input type="hidden" name="student_id" value="<%=@user.id%>">
         <input type="hidden" name="time_offset" id="pass_time_offset">
+        <input type="submit" value="Create Pass">
       </form>
     <%end%>
     <%if @visiting_user.id == @user.id%>
