@@ -22,7 +22,7 @@ class PassController < ApplicationController
         else
           @pass.one_time = false
         end
-        @pass.pass_datetime = DateTime.iso8601(params[:pass_datetime])
+        @pass.pass_datetime = (DateTime.iso8601(params[:pass_datetime]))+(params[:time_offset].to_i.minutes)
         @pass.save
       end
       redirect_to "/passes/index"
@@ -57,7 +57,7 @@ class PassController < ApplicationController
     @current_user = current_user
     if @current_user.user_type == 2 or @current_user.user_type == 3
       currentTime = DateTime.now
-      @passes = Pass.find_by(pass_datetime: (currentTime.to_time-1.hours).to_datetime..(currentTime.to_time+1.hours).to_datetime)
+      @passes = Pass.where(:pass_datetime => (currentTime.to_time-1.hours).to_datetime..(currentTime.to_time+1.hours).to_datetime)
       render "index"
     else
       redirect_to "/users/view/#{@current_user.id}"
