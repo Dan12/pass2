@@ -57,7 +57,9 @@ class PassController < ApplicationController
     @current_user = current_user
     if @current_user.user_type == 2 or @current_user.user_type == 3
       currentTime = DateTime.now
+      startTime = DateTime.new(2015,1,1,0,0,0)
       @passes = Pass.where(:pass_datetime => (currentTime.to_time-1.hours).to_datetime..(currentTime.to_time+1.hours).to_datetime)
+      @past_passes = Pass.where(:pass_datetime => startTime..(currentTime.to_time-1.hours).to_datetime)
       render "index"
     else
       redirect_to "/users/view/#{@current_user.id}"

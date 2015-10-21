@@ -1,3 +1,8 @@
-<%@passes.each do |pass|%>
-<p><%=pass.reason%></p>
+<p>Current Passes</p>
+<%@passes.reverse.each do |pass|%>
+  <p><%=pass.reason%></p>
+<%end%>
+<p>Past Passes</p>
+<%@past_passes.reverse.each do |pass|%>
+  <p><%=pass.reason%></p>
 <%end%>
